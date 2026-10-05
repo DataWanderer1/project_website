@@ -3,25 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <title>Haldiram's Food</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <nav class="navbar">
+    <div class="logo">Haldiram's</div>
+
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="restaurant.html">Restaurants</a>
+        <a href="#cart-container">Cart</a>
+    </div>
+</nav>
+<section class="hero">
     <h1>Haldiram's</h1>
     <p>Welcome to Haldiram's!</p>
-    <div>
-    <h3>Menu</h3>
-    <ul>
-        <li><p>Samosa          Rs.10</p><button id="samosa-button" class="add-to-cart">+</button></li>
-        <li><p>Chole Bhature   Rs.50</p><button id="chole-bhature-button" class="add-to-cart">+</button></li>
-        <li><p>Raj Kachori     Rs.30</p><button id="raj-kachori-button" class="add-to-cart">+</button></li>
-        <li><p>Thali           Rs.100</p><button id="thali-button" class="add-to-cart">+</button></li>
-    </ul>
+</section>
+
+<section class="menu-selection">
+    <h2>Our Menu</h2>
+    <div class="menu-container">
+        <div class="food-card">
+            <h3>Samosa</h3>
+            <p>₹10</p>
+            <button id="samosa-button" class="add-to-cart">Add to Cart</button>
+        </div>
+        <div class="food-card">
+            <h3>Chole Bhature</h3>
+            <p>₹50</p>
+            </p><button id="chole-bhature-button" class="add-to-cart">Add to Cart</button>
+        </div>
+        <div class="food-card">
+            <h3>Raj Kachori</h3>
+            <p>₹30</p>
+            <button id="raj-kachori-button" class="add-to-cart">Add to Cart</button>
+        </div>
+        <div class="food-card">
+            <h3>Thali</h3>
+            <p>₹100</p>
+            <button id="thali-button" class="add-to-cart">Add to Cart</button>
+        </div>
     </div>
+</section>
     <h3>Cart</h3>
     <div id="cart-container"></div>
-    <button id="calculate-total">Calculate Total</button>
     <h3 id="cart-total"></h3>
+    <button id ="checkout-button">Checkout</button><br>
+    <div id="checkout-section">
+        <h2>Checkout</h2>
 
+        <input type="text" id="customer-name" placeholder="Your Name">
+        <input type="text" id="customer-phone" placeholder="Your Phone Number">
+        <input type="text" id="customer-address" placeholder="Delivery Address"><br>
+        <button id="place-order">Place Order</button>
+    </div>
+
+    <div id="order-confirmation"></div>
     <script src="script.js"></script>
-    <a href="restaurant.html">Back to Restaurants</a>
 </body>
 </html>

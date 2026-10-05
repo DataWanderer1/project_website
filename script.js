@@ -21,33 +21,53 @@ function addToCart(food){
 
    
     console.log(cart);
-    let carttext="";
-    let total=0;
-    for(let i=0;i<cart.length;i++){
-        console.log(cart[i].name);
-        console.log(cart[i].price);
-        let subtotal = cart[i].price * cart[i].quantity;
-         total += subtotal;
-        carttext += `${cart[i].name} - ₹${cart[i].price} x ${cart[i].quantity} = ₹${subtotal}
-                     <button data-index="${i}">-</button><br>`;
-    }
-    cartContainer.innerHTML=carttext;
-    const minusButtons = document.querySelectorAll("[data-index]");
-    console.log(minusButtons);
-    for (let i=0; i<minusButtons.length; i++) {
-        minusButtons[i].addEventListener("click", function() {
-            let index=minusButtons[i].dataset.index;
-            console.log(index);
-            cart[index].quantity--;;
-        });
-    }
+    rendercart();
 }
 function calculateTotal(){
     let total=0;
-    for(let i=0;i<cart.length;i++){
+    for (let i=0; i<cart.length; i++){
         total += cart[i].price * cart[i].quantity;
     }
+    return total;
+}
+function rendercart(){
+     let carttext="";
+    let total=calculateTotal();
+    for(let i=0;i<cart.length;i++){
+        console.log(cart[i].name);
+        console.log(cart[i].price);
+        carttext += `${cart[i].name} - ₹${cart[i].price} x ${cart[i].quantity} = ₹${cart[i].price * cart[i].quantity}
+                     <button data-minus-index="${i}">-</button> <button data-plus-index="${i}">+</button><br>`;
+    }
+    cartContainer.innerHTML=carttext;
     cartTotal.innerHTML=`Total: ₹${total}`;
+    const minusButtons = document.querySelectorAll("[data-minus-index]");
+    console.log(minusButtons);
+    for (let i=0; i<minusButtons.length; i++) {
+        minusButtons[i].addEventListener("click", function() {
+            let index=minusButtons[i].dataset.minusIndex;
+            console.log(index);
+            if (cart[index].quantity >1){
+                cart[index].quantity--;
+            } else {
+                 cart.splice(index,1);
+            }
+            rendercart();
+        });
+    }
+
+    const plusButtons=document.querySelectorAll("[data-plus-index]");
+    console.log(plusButtons);
+    for (let i=0; i<plusButtons.length; i++) {
+        plusButtons[i].addEventListener("click", function(){
+            let index=plusButtons[i].dataset.plusIndex;
+            console.log(index);
+            cart[index].quantity++;
+            rendercart();
+
+        })
+
+    }
 }
 
 const buttons=document.querySelectorAll(".add-to-cart");
@@ -57,7 +77,24 @@ for(let i=0; i<buttons.length; i++){
         addToCart(menu[i]);
     });
 }
-const totalButton=document.getElementById("calculate-total");
-totalButton.addEventListener("click",function(){
-    calculateTotal();
+const checkoutSection=document.getElementById("checkout-section");
+const checkoutButton=document.getElementById("checkout-button");
+checkoutButton.addEventListener("click", function(){
+    console.log("checkout button clicked");
+    checkoutSection.style.display="block";
+});
+
+const orderConfirmation=document.getElementById("order-confirmation");
+const placeOrderButton=document.getElementById("place-order");
+placeOrderButton.addEventListener("click", function(){
+    console.log("place order clicked");
+    const customerName=document.getElementById("customer-name");
+    const customerPhone=document.getElementById("customer-phone");
+    const customerAddress=document.getElementById("customer-address");
+    console.log(customerName.value);
+    console.log(customerPhone.value);
+    console.log(customerAddress.value);
+    orderConfirmation.innerHTML=`<h3>Order Placed Successfully!</h3><br>
+    <p>Thank you, ${customerName.value}.<br>
+    Your total is ₹${calculateTotal()}.`
 });
