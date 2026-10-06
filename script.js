@@ -33,6 +33,9 @@ function calculateTotal(){
 function rendercart(){
      let carttext="";
     let total=calculateTotal();
+    if (cart.length===0) {
+        carttext="Your cart is empty.";
+    }
     for(let i=0;i<cart.length;i++){
         console.log(cart[i].name);
         console.log(cart[i].price);
@@ -77,10 +80,20 @@ for(let i=0; i<buttons.length; i++){
         addToCart(menu[i]);
     });
 }
+
+const clearcartbutton=document.getElementById("clear-cart");
+clearcartbutton.addEventListener("click",function() {
+    cart.splice(0,cart.length);
+    rendercart();
+})
 const checkoutSection=document.getElementById("checkout-section");
 const checkoutButton=document.getElementById("checkout-button");
 checkoutButton.addEventListener("click", function(){
     console.log("checkout button clicked");
+    if (cart.length===0){
+        alert("Your cart is empty. Add some items before checkout.")
+        return;
+    }
     checkoutSection.style.display="block";
 });
 
@@ -94,7 +107,33 @@ placeOrderButton.addEventListener("click", function(){
     console.log(customerName.value);
     console.log(customerPhone.value);
     console.log(customerAddress.value);
+    if (customerName.value==="") {
+        alert("Please enter your name.")
+        return;
+    }
+    if (!/^[A-Za-z ]+$/.test(customerName.value)) {
+        alert("Please enter a valid name.");
+        return;
+    }
+    if (customerPhone.value===""){
+        alert("Please enter your phone number.")
+        return;
+    }
+    if (!/^\d{10}$/.test(customerPhone.value)) {
+        alert("Please enter a valid phone number.")
+    }
+    if (customerAddress.value==="") {
+        alert("Please enter your address.")
+        return;
+    }
     orderConfirmation.innerHTML=`<h3>Order Placed Successfully!</h3><br>
     <p>Thank you, ${customerName.value}.<br>
-    Your total is ₹${calculateTotal()}.`
+    Your total is ₹${calculateTotal()}.</p>`;
+    cart.splice(0,cart.length);
+    rendercart();
+
+    customerName.value="";
+    customerPhone.value="";
+    customerAddress.value="";
+    checkoutSection.style.display="none";
 });
