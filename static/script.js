@@ -1,12 +1,6 @@
-const cart=[];
-const menu=[
-    {name:"Samosa", price:10},
-    {name:"Chole Bhature", price:50},
-    {name:"Raj Kachori", price:30},
-    {name:"Thali", price:100}];
-    
 const cartContainer = document.getElementById("cart-container");
 const cartTotal=document.getElementById("cart-total");
+const cart=[];
 function addToCart(food){
     let found=false;
     for (let i=0; i<cart.length; i++){
@@ -39,9 +33,15 @@ function rendercart(){
     for(let i=0;i<cart.length;i++){
         console.log(cart[i].name);
         console.log(cart[i].price);
-        carttext += `${cart[i].name} - ₹${cart[i].price} x ${cart[i].quantity} = ₹${cart[i].price * cart[i].quantity}
-                     <button data-minus-index="${i}">-</button> <button data-plus-index="${i}">+</button><br>`;
-    }
+        carttext += `<div class="cart-item"> 
+                            <span>${cart[i].name} - ₹${cart[i].price} x ${cart[i].quantity} = ₹${cart[i].price * cart[i].quantity}</span>
+                                <div class="quantity-buttons">
+                                     <button data-minus-index="${i}">-</button>
+                                     <button data-plus-index="${i}">+</button>
+                                </div>
+                     </div>
+    `;
+    }               
     cartContainer.innerHTML=carttext;
     cartTotal.innerHTML=`Total: ₹${total}`;
     const minusButtons = document.querySelectorAll("[data-minus-index]");
@@ -77,7 +77,11 @@ const buttons=document.querySelectorAll(".add-to-cart");
 console.log(buttons);
 for(let i=0; i<buttons.length; i++){
     buttons[i].addEventListener("click", function() {
-        addToCart(menu[i]);
+        const food={
+            name: buttons[i].dataset.name,
+            price: Number(buttons[i].dataset.price)
+        };
+        addToCart(food);
     });
 }
 
@@ -121,6 +125,7 @@ placeOrderButton.addEventListener("click", function(){
     }
     if (!/^\d{10}$/.test(customerPhone.value)) {
         alert("Please enter a valid phone number.")
+        return;
     }
     if (customerAddress.value==="") {
         alert("Please enter your address.")

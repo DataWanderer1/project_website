@@ -89,6 +89,29 @@ body {
     border: 1px solid #ddd;
     border-radius: 10px;
     background-color: #f9f9f9;
+    box-sizing: border-box;
+}
+
+.cart-item{
+    display:flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: space-between;
+    width:100%;
+    margin-bottom: 10px;
+}
+.quantity-buttons{
+    display: flex;
+    flex-direction:row;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.quantity-buttons button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor:pointer;
 }
 [data-minus-index],[data-plus-index] {
 padding:5px 10px;
