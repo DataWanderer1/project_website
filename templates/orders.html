@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Orders Received</title>
+        <link  rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    </head>
+    <body>
+        {%for order in orders%}
+        <div class="orders-dec">
+        <h3>{{order.customer_name}}</h3>
+        <h3>{{order.customer_phone}}</h3>
+        <h3>{{order.customer_address}}</h3>
+        {% endfor %}
+        </div>
+    </body>
+</html>

@@ -101,7 +101,7 @@ checkoutButton.addEventListener("click", function(){
     checkoutSection.style.display="block";
 });
 
-const orderConfirmation=document.getElementById("order-confirmation");
+/*const orderConfirmation=document.getElementById("order-confirmation");
 const placeOrderButton=document.getElementById("place-order");
 placeOrderButton.addEventListener("click", function(){
     console.log("place order clicked");
@@ -142,3 +142,4 @@ placeOrderButton.addEventListener("click", function(){
     customerAddress.value="";
     checkoutSection.style.display="none";
 });
+*/

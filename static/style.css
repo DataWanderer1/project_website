@@ -205,6 +205,11 @@ cursor: pointer;
 
 }
 
+.orders-dec {
+    background-color:lightsalmon;
+    text-align:center;
+}
+
 @media (max-width: 768px) {
     .menu-container{
         grid-template-columns: repeat(2,1fr);
